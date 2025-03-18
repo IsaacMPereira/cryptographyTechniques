@@ -14,7 +14,7 @@ int main(int argc, char *argv[2]){
 	char begin = 'a';
 	string alfa, alfaShifted;
 
-	shift = 26 - shift;
+	//shift = 26 - shift;
 	//cout << shift << endl;
 
 	if(shift > 26){
