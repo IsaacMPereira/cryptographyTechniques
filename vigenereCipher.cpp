@@ -1,3 +1,11 @@
+/*
+ * Vigenère Cipher implementation in C++
+ * Reference: Simon Singh, The Code Book, 1999, pg. 66.
+ *
+ * Compile: $ g++ -Wall vigenereCipher.cpp -o vigenereCipher.x
+ * Run: $ vigenereCipher.x 
+ * */
+
 #include <iostream>
 #include <string>
 
