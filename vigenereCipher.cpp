@@ -13,7 +13,6 @@ using namespace std;
 
 //Assignments for all the functions
 void vigenereSquare();
-string shiftedAlphabet(int shift);
 string generatingAlphabet();
 
 int main(){
@@ -24,23 +23,25 @@ int main(){
 }
 
 void vigenereSquare(){
-	string m[26][26];
+	char m[26][26] = {};
+	//int shift = 0;
 
-	int rowsController = 0;
-	for(int i=1; i<=26; i++){
-		string aux = shiftedAlphabet(i);
-		cout << "@" << aux << endl;
-		for(int j=0; j<26; j++){
-			for(int k=0; k<26; k++){
-				for(auto e : aux){
-					if(k == rowsController){
-						m[j][k] = e;
-					}
-				}
-			}
-		}
-		rowsController++;
+	string alfa = generatingAlphabet();
+	alfa = alfa.substr(1) + alfa[0];
+	cout << alfa << endl;
+	int count=0;
+	for(auto e : alfa){
+		cout << e << "|" << count << " ";
+		count++;
 	}
+	cout << endl;
+
+	//cout << shift << endl;
+	for(int i=0; i<26; i++){
+		for(int j=0; j<26; j++){
+			m[i][j] = alfa.at((j+i)%26);
+		}
+	}	
 
 	for(int i=0; i<26; i++){
 		cout << endl;
@@ -50,37 +51,11 @@ void vigenereSquare(){
 	}
 }
 
-string shiftedAlphabet(int shift){
-	int controller = 0;
-	string alfa, alfaShifted;
-
-	alfa = generatingAlphabet();
-
-	while(controller != 26){
-		if(shift == 26)
-			shift = 0;
-
-		alfaShifted.push_back(alfa.at(shift));
-
-		shift++;
-		controller++;
-	}
-
-	/*for(auto e : alfa)
-	  cout << e << " ";
-
-	  cout << endl;
-	  for(auto e : alfaShifted)
-	  cout << e << " ";*/
-
-	return alfaShifted;
-}
-
 string generatingAlphabet(){
-	char begin = 'a';
+	char begin = 'a', end = 'z';
 	string alfa;
 
-	for(int i=begin; i<='z'; i++){
+	for(int i=begin; i<=end; i++){
 		alfa.push_back(i);
 	}
 
