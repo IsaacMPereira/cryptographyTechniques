@@ -33,6 +33,7 @@ int main(){
 void vigenereSquare(string plainText, string key){
 	char m[26][26] = {};
 	string alfa, keyWord; 
+	vector<int> v_plainText, v_keyWord;
 
 	int i = 0, controller = 0, size = plainText.size();
 	while(1){
@@ -54,26 +55,42 @@ void vigenereSquare(string plainText, string key){
 		}
 	}	
 
-	cout << "Cipher text: " << endl;
+	cout << "Cipher text: ";
 	//int aux_p, aux_k;
 	for(size_t k=0; k<plainText.size(); k++){
 		for(size_t l=0; l<alfa.size(); l++){
 			if(alfa.at(l) == plainText.at(k)){
-				//aux_p = k;				
-				cout << alfa.at(l) << "|" << l+1 << " ";
+				//aux_p = l+1;				
+				//cout << l+1 << " ";
+				v_plainText.push_back(l+1);
+			}
+		}
+	}
+
+	for(size_t m=0; m<keyWord.size(); m++){
+		for(size_t n=0; n<alfa.size(); n++){
+			if(alfa.at(n) == keyWord.at(m)){
+				//aux_k = n;
+				//cout << n << " ";
+				v_keyWord.push_back(n);
 			}
 		}
 	}	
 
-	cout << endl;
-	for(size_t m=0; m<keyWord.size(); m++){
-		for(size_t n=0; n<alfa.size(); n++){
-			if(alfa.at(n) == keyWord.at(m)){
-				//aux_k = m;
-				cout << alfa.at(n) << "|" << n << " ";
-			}
-		}
+	for(size_t z=0; z<v_plainText.size(); z++){
+		int i = v_plainText.at(z);
+		int j = v_keyWord.at(z);
+
+		cout << m[i][j];
 	}
+
+	/*cout << endl;
+	for(auto e : v_plainText)
+		cout << e << " ";
+
+	cout << endl;
+	for(auto e : v_keyWord)
+		cout << e << " ";*/
 
 	cout << endl;
 	for(int i=0; i<26; i++){
