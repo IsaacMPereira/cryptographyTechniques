@@ -20,9 +20,6 @@ int main(int argc, char *argv[2]){
 	if(shift > 26){
 		cout << "Shift must be smaller then 26" << endl;
 		exit(1);
-	}else if(shift <= 0){
-		cout << "Shift must be bigger then 0" << endl;
-		exit(1);
 	}
 
 	for(int i=begin; i<='z'; i++){
