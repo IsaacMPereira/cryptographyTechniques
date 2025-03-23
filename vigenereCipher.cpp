@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include <regex>
+#include <fstream>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ int main(){
 		exit(1);
 	}
 	plainText = lowerCasing(plainText);
-	
+
 	cout << "Key: ";
 	getline(cin, key);
 	key = erasingEmptySpaces(key);
@@ -83,8 +84,13 @@ string lowerCasing(string s){
 
 void vigenereSquare(string plainText, string key){
 	char m[26][26] = {};
-	string alfa, keyWord; 
+	string alfa, keyWord, cipherText; 
 	vector<int> v_plainText, v_keyWord; //Vectors for plainText and keyWord indices
+	ofstream file1("vigenereCheckerFile.txt");
+	if(!file1.is_open()){
+		cout << "Error on opennig vigenereCheckerFile.txt (file1)  in 'w' mode in vigenereSquare()" << endl;
+		exit(1);
+	}
 
 	int size = plainText.size();
 	keyWord = generatingKeyWord(key, size);
@@ -93,12 +99,17 @@ void vigenereSquare(string plainText, string key){
 	alfa = generatingAlphabet();
 	alfa = alfa.substr(1) + alfa.at(0); //Ensuring that the first line of the square is gonna be shifted by 1
 
-	//Creating the square in fact
+	//Creating the square in fact and inserting it in the checker file
 	for(int i=0; i<26; i++){
 		for(int j=0; j<26; j++){
 			m[i][j] = alfa.at((i+j)%26);
+			file1 << m[i][j] << i << "|" << j << "\t";
+			if(j == 25){
+				file1 << "\n";
+			}
 		}
 	}	
+	file1 << "\n\n";
 
 	//Obtening the corret indices for key word and the plain text, bouth according to the alphabet
 	for(size_t k=0; k<plainText.size(); k++){
@@ -123,16 +134,40 @@ void vigenereSquare(string plainText, string key){
 		int j = v_keyWord.at(z);
 
 		cout << m[i][j];
+		cipherText.push_back(m[i][j]);
 	}
 
 	//Printting the square just for a better visualization
 	/*cout << endl;
-	for(int i=0; i<26; i++){
-		cout << endl;
-		for(int j=0; j<26; j++){
-			cout << m[i][j] << " ";
-		}
-	}*/
+	  for(int i=0; i<26; i++){
+	  cout << endl;
+	  for(int j=0; j<26; j++){
+	  cout << m[i][j] << " ";
+	  }
+	  }*/
+
+	//Inserting the vectors, key word, plain text and cipher text in the checker file 
+	for(auto e : v_keyWord)
+		file1 << e << "\t";
+
+	file1 << "\n";
+	for(auto e : v_plainText)
+		file1 << e << "\t";
+
+	file1 << "\n\n";
+	for(auto e : keyWord)
+		file1 << e << "\t";
+
+	file1 << "\n";
+	for(auto e : plainText)
+		file1 << e << "\t";
+
+	/*file1 << "\n";
+	//cout << endl << endl;
+	for(auto e : cipherText)
+		file1 << e << "\t";*/
+
+	file1.close();
 }
 
 string generatingKeyWord(string key, int size){
