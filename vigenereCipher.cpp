@@ -10,10 +10,12 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <regex>
 
 using namespace std;
 
 //Assignments for all the functions
+bool isAlphabetic(const string &s);
 string erasingEmptySpaces(const string &s);
 string lowerCasing(string s);
 void vigenereSquare(string plainText, string key);
@@ -26,17 +28,32 @@ int main(){
 	cout << "Plain text: ";
 	getline(cin, plainText);
 	plainText = erasingEmptySpaces(plainText);
+	if(!isAlphabetic(plainText)){
+		cout << "Error. String can't have not alphabetics characteres" << endl;		
+		exit(1);
+	}
 	plainText = lowerCasing(plainText);
 	
 	cout << "Key: ";
 	getline(cin, key);
 	key = erasingEmptySpaces(key);
+	if(!isAlphabetic(key)){
+		cout << "Error. String can't have not alphabetics characteres" << endl;
+		exit(1);
+	}
 	key = lowerCasing(key);
 
 	vigenereSquare(plainText, key);
 
 	cout << endl;
 	return 0;
+}
+
+//Ensuring that the characteres are alphabetic
+bool isAlphabetic(const string &s){
+	regex alfaRegex("^[A-Za-z]+$");
+
+	return regex_match(s, alfaRegex);
 }
 
 //Erasing the empty spaces in the string
