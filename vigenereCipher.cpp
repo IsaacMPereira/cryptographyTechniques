@@ -15,8 +15,8 @@
 using namespace std;
 
 //Assignments for all the functions
-bool isAlphabetic(const string &s);
 string erasingEmptySpaces(const string &s);
+bool isAlphabetic(const string &s);
 string lowerCasing(string s);
 void vigenereSquare(string plainText, string key);
 string generatingKeyWord(string key, int size);
@@ -49,13 +49,6 @@ int main(){
 	return 0;
 }
 
-//Ensuring that the characteres are alphabetic
-bool isAlphabetic(const string &s){
-	regex alfaRegex("^[A-Za-z]+$");
-
-	return regex_match(s, alfaRegex);
-}
-
 //Erasing the empty spaces in the string
 string erasingEmptySpaces(const string &s){
 	string result = s;
@@ -63,6 +56,13 @@ string erasingEmptySpaces(const string &s){
 	result.erase(remove_if(result.begin(), result.end(), ::isspace), result.end());	
 
 	return result;
+}
+
+//Ensuring that the characteres are alphabetic
+bool isAlphabetic(const string &s){
+	regex alfaRegex("^[A-Za-z]+$");
+
+	return regex_match(s, alfaRegex);
 }
 
 //Put the string in lower case
