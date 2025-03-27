@@ -1,0 +1,16 @@
+#Script para plotagem de circunferências trigonométricas
+
+set xlabel "x"
+set ylabel "y"
+
+set xrange [-5:5]
+set yrange [-5:5]
+set xtics -1,0.5,1
+set ytics -1,0.5,1
+set zeroaxis
+
+set parametric
+set trange [0:2*pi]
+set size square
+
+plot 3+2*cos(t), 3+2*sin(t) t "Variacoes nas equacoes gerais"
