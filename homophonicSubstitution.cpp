@@ -1,25 +1,25 @@
 #include <iostream>
 #include <string>
-#include <radom>
+//#include <radom>
+#include <set>
+#include <vector>
 
 using namespace std;
 
 string generatingAlphabet();
-vector<int> frequency();
+set<int> frequency();
 
 int main(){
+	set<int> v;
+
 	string alfa = generatingAlphabet();
 	
-	string plainText;
-	cin >> plainText;
-	cout << v_frequency.size() << endl;
+	//string plainText;
+	//cin >> plainText;
 
-	int count = 0;
-	for(size_t i=0; i<plainText.size(); i++){
-		for(size_t j=0; j<alfa.size(); j++){
-			
-		}
-	}
+	v = frequency();
+	for(auto e : v)
+		cout << e << " ";
 
 	cout << endl;
 	return 0;
@@ -29,30 +29,37 @@ string generatingAlphabet(){
 	char begin = 'a', end = 'z';
 	string alfa;
 
-	for(int i=begin; i<=end; i++){
+	for(int i=begin; i<=end; i++)
 		alfa.push_back(i);
-	}
 
 	return alfa;
 }
 
-vector<int> frequency(){
+set<int> frequency(){
 	srand(time(NULL));
 	vector<int> v_frequency = {8, 2, 3, 4, 12, 2, 2, 6, 7, 1, 1, 4, 2, 6, 7, 2, 1, 6, 6, 9, 3, 1, 2, 1, 2, 1};
-	vector<int> v;
-	int sum;
+	set<int> v;
+	int sum=0;
 
-	for(int i=0; i<v_frequency.size(); i++)
+	int s1 = v_frequency.size();
+	for(int i=0; i<s1; i++)
 		sum += v_frequency.at(i);		
 
-	cout << "Mod value: " << sum << endl;
+	cout << v_frequency.size() << endl;
 
-	int count = 0;
-	for(size_t i=0; i<v_frequency.size(); i++){
-		while(count <= v_frequency.at(i)){
-			int aux = rand() % 100;
-			v.push_back(aux);
-			count++;			
-		}		
+	for(auto e : v_frequency)
+		cout << e << " ";
+
+	cout << endl << "Mod value: " << sum << endl;
+
+	int aux;
+	size_t z = sum;
+	while(v.size() != z){
+		aux = rand() % 100;
+		v.insert(aux);
 	}
+
+	cout << endl << v.size() << endl;
+
+	return v;
 }
